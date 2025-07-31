@@ -1,20 +1,20 @@
 [
     {
         "category": "Metadata",
-        "guid": "074F9B47-3587-4A92-8D2F-036E5D52F12B",
+        "guid": "074f9b47-3587-4a92-8d2f-036e5d52f12b",
         "name": "TubeArchivistMetadataKids",
         "description": "TubeArchivistMetadataKids is a plugin that automatically manages metadata for videos downloaded with TubeArchivist from YouTube.\n",
         "owner": "DarkFighterLuke",
-        "overview": "Metadata for your TubeArchivist library on Jellyfin",
+        "overview": "Metadata for your TubeArchivist Kids library on Jellyfin",
         "imageUrl": "https://raw.githubusercontent.com/tubearchivist/tubearchivist-jf-plugin/master/images/logo.png",
         "versions": [
             {
                 "version": "1.3.7.0",
                 "changelog": "Fix JF->TA Sync\n",
                 "targetAbi": "10.10.0.0",
-                "sourceUrl": "https://github.com/johnmathews/tubearchivist-jf-plugin-kids/releases/download/v1.3.7/TubeArchivistMetadataKids_1.3.7.0.zip",
-                "checksum": "34d6ce5fd2c1ee4518915515266fdd96",
-                "timestamp": "2025-05-27T18:36:55Z"
+                "sourceUrl": "https://github.com/johnmathews/tubearchivist-jf-plugin-kids/releases/download/v1.3.7/tubearchivistmetadatakids_1.3.7.0.zip",
+                "checksum": "9a334ca40730988d5734010073940704",
+                "timestamp": "2025-07-31T13:41:19Z"
             },
             {
                 "version": "1.3.6.0",
