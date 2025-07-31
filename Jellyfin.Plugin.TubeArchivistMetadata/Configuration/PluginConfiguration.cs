@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Xml.Serialization;
 using Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities;
 using MediaBrowser.Model.Plugins;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,7 @@ namespace Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration
     /// <summary>
     /// Plugin configuration.
     /// </summary>
+    [XmlRoot("TubeArchivistMetadataKidsConfiguration")]
     public class PluginConfiguration : BasePluginConfiguration
     {
         private ILogger _logger;
