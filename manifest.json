@@ -10,11 +10,11 @@
         "versions": [
             {
                 "version": "1.3.11.0",
-                "changelog": "Update plugin MD5 hash\n",
+                "changelog": "Fix JF->TA Sync\n",
                 "targetAbi": "10.10.0.0",
                 "sourceUrl": "https://github.com/johnmathews/tubearchivist-jf-plugin-kids/releases/download/v1.3.11/tubearchivistmetadatakids_1.3.11.0.zip",
-                "checksum": "b88399019f7534f59f22f445eecd6aa1",
-                "timestamp": "2025-07-31T21:40:49Z"
+                "checksum": "4aac9a8ed1322ac4e17120cd43d901c0",
+                "timestamp": "2025-07-31T19:47:50Z"
             },
             {
                 "version": "1.3.10.0",
