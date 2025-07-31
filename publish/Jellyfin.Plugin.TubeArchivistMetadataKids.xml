@@ -1,0 +1,682 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jellyfin.Plugin.TubeArchivistMetadataKids</name>
+    </assembly>
+    <members>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration">
+            <summary>
+            Plugin configuration.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.CollectionTitle">
+            <summary>
+            Gets or sets TubeArchivist collection display name.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.TubeArchivistUrl">
+            <summary>
+            Gets or sets TubeArchivist URL.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.TubeArchivistApiKey">
+            <summary>
+            Gets or sets TubeArchivist API key.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.MaxDescriptionLength">
+            <summary>
+            Gets or sets maximum series and episodes overviews length.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.TAJFSync">
+            <summary>
+            Gets or sets a value indicating whether to enable TA->JF playback progress synchronization.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.JFTASync">
+            <summary>
+            Gets or sets a value indicating whether to enable JF->TA playback progress synchronization.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.JFUsernameFrom">
+            <summary>
+            Gets or sets the playback progress owner Jellyfin username to synchronize data to TubeArchivist.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.JFUsernamesTo">
+            <summary>
+            Gets or sets the playback progress owners Jellyfin usernames to synchronize data from TubeArchivist.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.TAJFTaskInterval">
+            <summary>
+            Gets or sets the interval in seconds at which the TubeArchivist to Jellyfin playback progress synchronization task should run.
+            It requires Jellyfin server restart to take effect.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration.PluginConfiguration.GetJFUsernamesToArray">
+            <summary>
+            Gets the playback progress owners Jellyfin usernames to synchronize data from TubeArchivist.
+            </summary>
+            <returns>An array of usernames.</returns>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Constants">
+            <summary>
+            Class containing plugin constants.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Plugin.TubeArchivistMetadataKids.Constants.PluginName">
+            <summary>
+            Plugin name.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Plugin.TubeArchivistMetadataKids.Constants.PluginGuid">
+            <summary>
+            Plugin GUID.
+            </summary>
+        </member>
+        <member name="F:Jellyfin.Plugin.TubeArchivistMetadataKids.Constants.ProviderName">
+            <summary>
+            Providers name.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin">
+            <summary>
+            The main plugin.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.#ctor(MediaBrowser.Common.Configuration.IApplicationPaths,MediaBrowser.Model.Serialization.IXmlSerializer,Microsoft.Extensions.Logging.ILogger{Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin},MediaBrowser.Controller.Session.ISessionManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin"/> class.
+            </summary>
+            <param name="applicationPaths">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IApplicationPaths"/> interface.</param>
+            <param name="xmlSerializer">Instance of the <see cref="T:MediaBrowser.Model.Serialization.IXmlSerializer"/> interface.</param>
+            <param name="logger">Instance of the <see cref="T:Microsoft.Extensions.Logging.ILogger"/> interface.</param>
+            <param name="sessionManager">Instance of the <see cref="T:MediaBrowser.Controller.Session.ISessionManager"/> interface.</param>
+            <param name="libraryManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.ILibraryManager"/> interface.</param>
+            <param name="userManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserManager"/> interface.</param>
+            <param name="userDataManager">Instance of the <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/> interface.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.Instance">
+            <summary>
+            Gets the current plugin instance.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.Logger">
+            <summary>
+            Gets the logger instance used globally by the plugin.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.HttpClient">
+            <summary>
+            Gets the HTTP client used globally by the plugin.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.SessionManager">
+            <summary>
+            Gets the SessionManager used globally by the plugin.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.LibraryManager">
+            <summary>
+            Gets the LibraryManager used globally by the plugin.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.GetPages">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.UpdateAuthorizationHeader(System.String)">
+            <summary>
+            Updates the HTTP client's Authorization header with the current API key.
+            </summary>
+            <param name="apiKey">TubeArchivist API key.</param>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin.LogTAApiConnectionStatus">
+            <summary>
+            Logs the TubeArchivist API connection status.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeImageProvider">
+            <summary>
+            Image provider which interacts with TubeArchivist library.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeImageProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeImageProvider"/> class.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeImageProvider.Name">
+            <summary>
+            Gets the provider name.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeImageProvider.Supports(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeImageProvider.GetSupportedImages(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeImageProvider.GetImages(MediaBrowser.Controller.Entities.BaseItem,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeImageProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeMetadataProvider">
+            <summary>
+            Metadata provider which interacts with TubeArchivist library.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeMetadataProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeMetadataProvider"/> class.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeMetadataProvider.Name">
+            <summary>
+            Gets the provider name.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeMetadataProvider.GetMetadata(MediaBrowser.Controller.Providers.EpisodeInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeMetadataProvider.GetSearchResults(MediaBrowser.Controller.Providers.EpisodeInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.EpisodeMetadataProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesImageProvider">
+            <summary>
+            Image provider which interacts with TubeArchivist library.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesImageProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesImageProvider"/> class.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesImageProvider.Name">
+            <summary>
+            Gets the provider name.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesImageProvider.Supports(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesImageProvider.GetSupportedImages(MediaBrowser.Controller.Entities.BaseItem)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesImageProvider.GetImages(MediaBrowser.Controller.Entities.BaseItem,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesImageProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesMetadataProvider">
+            <summary>
+            Metadata provider which interacts with TubeArchivist library.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesMetadataProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesMetadataProvider"/> class.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesMetadataProvider.Name">
+            <summary>
+            Gets the provider name.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesMetadataProvider.GetMetadata(MediaBrowser.Controller.Providers.SeriesInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesMetadataProvider.GetSearchResults(MediaBrowser.Controller.Providers.SeriesInfo,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Providers.SeriesMetadataProvider.GetImageResponse(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask">
+            <summary>
+            Task to sync Jellyfin playback progresses to TubeArchivist.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask.#ctor(Microsoft.Extensions.Logging.ILogger{Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin},MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask"/> class.
+            </summary>
+            <param name="logger">Logger.</param>
+            <param name="libraryManager">Library manager.</param>
+            <param name="userManager">User manager.</param>
+            <param name="userDataManager">User data manager.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask.Category">
+            <inheritdoc/>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask.Key">
+            <inheritdoc/>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask.ExecuteAsync(System.IProgress{System.Double},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.JFToTubearchivistProgressSyncTask.GetDefaultTriggers">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask">
+            <summary>
+            Task to sync TubeArchivist playback progresses to Jellyfin.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask.#ctor(Microsoft.Extensions.Logging.ILogger{Jellyfin.Plugin.TubeArchivistMetadataKids.Plugin},MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.IUserDataManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask"/> class.
+            </summary>
+            <param name="logger">Logger.</param>
+            <param name="libraryManager">Library manager.</param>
+            <param name="userManager">User manager.</param>
+            <param name="userDataManager">User data manager.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask.Category">
+            <inheritdoc/>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask.Key">
+            <inheritdoc/>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask.ExecuteAsync(System.IProgress{System.Double},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks.TAToJellyfinProgressSyncTask.GetDefaultTriggers">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Watched">
+            <summary>
+            A class representing TubeArchivist API video watched status.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Watched.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Watched"/> class.
+            </summary>
+            <param name="id">Id of the video/channel/playlist.</param>
+            <param name="isWatched">Watched status.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Watched.Id">
+            <summary>
+            Gets the id of the video/channel/playlist.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Watched.IsWatched">
+            <summary>
+            Gets a value indicating whether the item has been watched or not.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel">
+            <summary>
+            A class representing TubeArchivist API channel data.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.#ctor(System.String,System.String,System.String,System.String,System.Collections.ObjectModel.Collection{System.String},System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel"/> class.
+            </summary>
+            <param name="bannerUrl">URL of the channel banner image.</param>
+            <param name="description">Channel description.</param>
+            <param name="id">Channel YouTube id.</param>
+            <param name="name">Channel name.</param>
+            <param name="tags">Channel tags.</param>
+            <param name="thumbUrl">URL of the channel thumb image.</param>
+            <param name="tvartUrl">URL of the channel tvart image.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.BannerUrl">
+            <summary>
+            Gets or sets the URL of the channel banner image.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.Description">
+            <summary>
+            Gets or sets the channel description.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.Id">
+            <summary>
+            Gets or sets the channel YouTube id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.Name">
+            <summary>
+            Gets or sets the channel name.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.Tags">
+            <summary>
+            Gets channel tags.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.ThumbUrl">
+            <summary>
+            Gets or sets the URL of the channel thumb image.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.TvartUrl">
+            <summary>
+            Gets or sets the URL of the channel tvart image.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.ToSearchResult">
+            <summary>
+            Converts the TubeArchivist API channel to a Jellyfin <see cref="T:MediaBrowser.Model.Providers.RemoteSearchResult"/> object.
+            </summary>
+            <returns>The channel equivalent Jellyfin <see cref="T:MediaBrowser.Model.Providers.RemoteSearchResult"/> object.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel.ToSeries">
+            <summary>
+            Converts the TubeArchivist API channel to a Jellyfin <see cref="T:MediaBrowser.Controller.Entities.TV.Series"/> object.
+            </summary>
+            <returns>The channel equivalent Jellyfin <see cref="T:MediaBrowser.Controller.Entities.TV.Series"/> object.</returns>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.PingResponse">
+            <summary>
+            A class representing TubeArchivist API ping response data.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.PingResponse.#ctor(System.String,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.PingResponse"/> class.
+            </summary>
+            <param name="response">Response from the API ("pong").</param>
+            <param name="user">TubeArchivist user id.</param>
+            <param name="version">TubeArchivist version.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.PingResponse.Response">
+            <summary>
+            Gets response to the ping ("pong").
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.PingResponse.User">
+            <summary>
+            Gets user id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.PingResponse.Version">
+            <summary>
+            Gets TubeArchivist version.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.ResponseContainer`1">
+            <summary>
+            Class representing the base common structure of TubeArchivist API responses.
+            </summary>
+            <typeparam name="T">The contained data type.</typeparam>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.ResponseContainer`1.Data">
+            <summary>
+            Gets or sets the contained data object.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TagsJsonConverter">
+            <summary>
+            Custom JsonConverter to handle tags list that could be null.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TagsJsonConverter.CanConvert(System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TagsJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TagsJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi">
+            <summary>
+            Class to interact with TubeArchivist API.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi"/> class.
+            </summary>
+            <param name="httpClient">HTTP client to make requests to TubeArchivist API.</param>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi.GetInstance">
+            <summary>
+            Gets the instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi"/> class.
+            </summary>
+            <returns>The TubeArchivistApi instance.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi.GetChannel(System.String)">
+            <summary>
+            Retrieves the given channel information from TubeArchivist.
+            </summary>
+            <param name="channelId">YouTube channel id.</param>
+            <returns>A task.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi.GetVideo(System.String)">
+            <summary>
+            Retrieves the given video information from TubeArchivist.
+            </summary>
+            <param name="videoId">YouTube video id.</param>
+            <returns>A task.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi.Ping">
+            <summary>
+            Validates connection and authentication to TubeArchivist.
+            </summary>
+            <returns>The ping response.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi.SetProgress(System.String,System.Int64)">
+            <summary>
+            Send video playback progress to TubeArchivist.
+            </summary>
+            <param name="videoId">Video id.</param>
+            <param name="progress">Progress in seconds.</param>
+            <returns>The response <see cref="T:System.Net.HttpStatusCode"/>.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi.GetProgress(System.String)">
+            <summary>
+            Send video playback progress to TubeArchivist.
+            </summary>
+            <param name="videoId">Video id.</param>
+            <returns>Video playback progress data.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.TubeArchivistApi.SetWatchedStatus(System.String,System.Boolean)">
+            <summary>
+            Set video/channel/playlist as watched on TubeArchivist.
+            </summary>
+            <param name="itemId">Video/channel/playlist id.</param>
+            <param name="isWatched">Whether the item has been watched or not.</param>
+            <returns>The response <see cref="T:System.Net.HttpStatusCode"/>.</returns>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Player">
+            <summary>
+            A class representing TubeArchivist API video player data.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Player.#ctor(System.Int64,System.Boolean,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Player"/> class.
+            </summary>
+            <param name="duration">Duration of the video.</param>
+            <param name="isWatched">Whether the video is marked as watched.</param>
+            <param name="position">Video watched seconds.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Player.Duration">
+            <summary>
+            Gets the duration of the video.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Player.IsWatched">
+            <summary>
+            Gets a value indicating whether the video is marked as watched.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Player.Position">
+            <summary>
+            Gets the video watched seconds.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Progress">
+            <summary>
+            A class representing TubeArchivist API video progress data.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Progress.#ctor(System.Int64,System.String,System.Nullable{System.Int64})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Progress"/> class.
+            </summary>
+            <param name="position">Playback progress in seconds.</param>
+            <param name="youtubeId">Video YouTube id.</param>
+            <param name="userId">Playback progress user id.</param>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Progress.#ctor(System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Progress"/> class.
+            </summary>
+            <param name="position">Playback progress in seconds.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Progress.YoutubeId">
+            <summary>
+            Gets or sets the video YouTube id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Progress.UserId">
+            <summary>
+            Gets or sets playback progress user id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Progress.Position">
+            <summary>
+            Gets or sets video playback progress (in seconds).
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video">
+            <summary>
+            A class representing TubeArchivist API video data.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.#ctor(Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Channel,System.Collections.ObjectModel.Collection{System.String},System.String,System.String,System.DateTime,System.String,System.String,Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Player)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video"/> class.
+            </summary>
+            <param name="channel">Channel the video belongs to.</param>
+            <param name="tags">Video tags.</param>
+            <param name="title">Video title.</param>
+            <param name="description">Video description.</param>
+            <param name="published">Video published date.</param>
+            <param name="vidThumbUrl">Video thuumb image URL.</param>
+            <param name="youtubeId">Video YouTube id.</param>
+            <param name="player">Player info.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.Channel">
+            <summary>
+            Gets or sets the channel info.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.Tags">
+            <summary>
+            Gets video tags.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.Title">
+            <summary>
+            Gets or sets video title.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.Description">
+            <summary>
+            Gets or sets video description.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.Published">
+            <summary>
+            Gets or sets video published date.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.VidThumbUrl">
+            <summary>
+            Gets or sets video thumb image URL.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.YoutubeId">
+            <summary>
+            Gets or sets video YouTube id.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.Player">
+            <summary>
+            Getsthe player related info.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.ToSearchResult">
+            <summary>
+            Converts the TubeArchivist API video to a Jellyfin <see cref="T:MediaBrowser.Model.Providers.RemoteSearchResult"/> object.
+            </summary>
+            <returns>The video equivalent Jellyfin <see cref="T:MediaBrowser.Model.Providers.RemoteSearchResult"/> object.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist.Video.ToEpisode">
+            <summary>
+            Converts the TubeArchivist API video to a Jellyfin <see cref="T:MediaBrowser.Controller.Entities.TV.Episode"/> object.
+            </summary>
+            <returns>The video equivalent Jellyfin <see cref="T:MediaBrowser.Controller.Entities.TV.Episode"/> object.</returns>
+        </member>
+        <member name="T:Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities.Utils">
+            <summary>
+            Class containing common utils.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities.Utils.SanitizeUrl(System.String)">
+            <summary>
+            Sanitize the given URL.
+            </summary>
+            <param name="inputUrl">An URL string.</param>
+            <returns>The URL string without spaces, doubled slashes and with a trailing slash.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities.Utils.FormatDescription(System.String)">
+            <summary>
+            Format episodes and series descriptions replacing newlines with br tags.
+            </summary>
+            <param name="description">String to format.</param>
+            <returns>A string with \n replaced by br tags.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities.Utils.GetVideoNameFromPath(System.String)">
+            <summary>
+            Get video name from file path on the disk.
+            </summary>
+            <param name="path">File path on disk.</param>
+            <returns>The video name.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities.Utils.GetChannelNameFromPath(System.String)">
+            <summary>
+            Get channel name from directory path on the disk.
+            </summary>
+            <param name="path">Directory path on disk.</param>
+            <returns>The channel name.</returns>
+        </member>
+    </members>
+</doc>
