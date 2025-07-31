@@ -4,11 +4,11 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.TubeArchivistMetadata.Utilities;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Jellyfin.Plugin.TubeArchivistMetadata.TubeArchivist
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist
 {
     /// <summary>
     /// Class to interact with TubeArchivist API.

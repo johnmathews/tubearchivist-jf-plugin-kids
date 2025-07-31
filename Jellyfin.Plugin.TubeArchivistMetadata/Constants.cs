@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.TubeArchivistMetadata
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids
 {
     /// <summary>
     /// Class containing plugin constants.
@@ -8,16 +8,16 @@ namespace Jellyfin.Plugin.TubeArchivistMetadata
         /// <summary>
         /// Plugin name.
         /// </summary>
-        public const string PluginName = "TubeArchivist Metadata";
+        public const string PluginName = "TubeArchivist Metadata Kids";
 
         /// <summary>
         /// Plugin GUID.
         /// </summary>
-        public const string PluginGuid = "dc97d0c6-28b0-4242-afb4-5833ae1b3715";
+        public const string PluginGuid = "074F9B47-3587-4A92-8D2F-036E5D52F12B";
 
         /// <summary>
         /// Providers name.
         /// </summary>
-        public const string ProviderName = "TubeArchivist";
+        public const string ProviderName = "TubeArchivistKids";
     }
 }

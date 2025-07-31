@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.TubeArchivistMetadata.TubeArchivist
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist
 {
     /// <summary>
     /// Class representing the base common structure of TubeArchivist API responses.

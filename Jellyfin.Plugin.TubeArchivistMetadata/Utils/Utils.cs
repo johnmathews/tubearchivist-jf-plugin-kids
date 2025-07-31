@@ -2,7 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Jellyfin.Plugin.TubeArchivistMetadata.Utilities
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities
 {
     /// <summary>
     /// Class containing common utils.

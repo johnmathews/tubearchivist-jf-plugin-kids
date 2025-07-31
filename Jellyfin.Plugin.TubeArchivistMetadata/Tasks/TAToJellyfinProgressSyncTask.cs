@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Jellyfin.Data.Enums;
-using Jellyfin.Plugin.TubeArchivistMetadata.TubeArchivist;
-using Jellyfin.Plugin.TubeArchivistMetadata.Utilities;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Library;
@@ -14,7 +14,7 @@ using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.TubeArchivistMetadata.Tasks
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks
 {
     /// <summary>
     /// Task to sync TubeArchivist playback progresses to Jellyfin.
@@ -48,7 +48,7 @@ namespace Jellyfin.Plugin.TubeArchivistMetadata.Tasks
         public string Description => "This tasks syncs TubeArchivist playback progresses to Jellyfin";
 
         /// <inheritdoc/>
-        public string Category => "TubeArchivistMetadata";
+        public string Category => "TubeArchivistMetadataKids";
 
         /// <inheritdoc/>
         public string Key => "TAToJellyfinProgressSyncTask";

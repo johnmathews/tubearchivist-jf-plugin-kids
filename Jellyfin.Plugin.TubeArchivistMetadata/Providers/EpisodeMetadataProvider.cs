@@ -7,8 +7,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.TubeArchivistMetadata.TubeArchivist;
-using Jellyfin.Plugin.TubeArchivistMetadata.Utilities;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Providers;
@@ -17,7 +17,7 @@ using MediaBrowser.Model.Providers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Jellyfin.Plugin.TubeArchivistMetadata.Providers
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids.Providers
 {
     /// <summary>
     /// Metadata provider which interacts with TubeArchivist library.
@@ -44,7 +44,7 @@ namespace Jellyfin.Plugin.TubeArchivistMetadata.Providers
         /// <summary>
         /// Gets the provider name.
         /// </summary>
-        public string Name => "TubeArchivist";
+        public string Name => "TubeArchivistKids";
 
         /// <inheritdoc />
         public async Task<MetadataResult<Episode>> GetMetadata(EpisodeInfo info, CancellationToken cancellationToken)

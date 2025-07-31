@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>Jellyfin.Plugin.TubeArchivistMetadata</RootNamespace>
+    <RootNamespace>Jellyfin.Plugin.TubeArchivistMetadataKids</RootNamespace>
+    <AssemblyName>Jellyfin.Plugin.TubeArchivistMetadataKids</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>enable</Nullable>

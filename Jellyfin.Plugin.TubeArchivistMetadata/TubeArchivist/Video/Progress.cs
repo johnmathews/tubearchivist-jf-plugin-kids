@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Jellyfin.Plugin.TubeArchivistMetadata.TubeArchivist
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist
 {
     /// <summary>
     /// A class representing TubeArchivist API video progress data.

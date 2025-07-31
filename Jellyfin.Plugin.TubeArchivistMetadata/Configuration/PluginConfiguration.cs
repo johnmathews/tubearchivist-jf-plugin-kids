@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Jellyfin.Plugin.TubeArchivistMetadata.Utilities;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities;
 using MediaBrowser.Model.Plugins;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.TubeArchivistMetadata.Configuration
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration
 {
     /// <summary>
     /// Plugin configuration.

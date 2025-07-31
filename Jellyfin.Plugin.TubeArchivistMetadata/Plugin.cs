@@ -5,10 +5,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Jellyfin.Data.Enums;
-using Jellyfin.Plugin.TubeArchivistMetadata.Configuration;
-using Jellyfin.Plugin.TubeArchivistMetadata.Tasks;
-using Jellyfin.Plugin.TubeArchivistMetadata.TubeArchivist;
-using Jellyfin.Plugin.TubeArchivistMetadata.Utilities;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.Configuration;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.Tasks;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.TubeArchivist;
+using Jellyfin.Plugin.TubeArchivistMetadataKids.Utilities;
 using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Controller.Entities;
@@ -20,7 +20,7 @@ using MediaBrowser.Model.Serialization;
 using MediaBrowser.Model.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.TubeArchivistMetadata
+namespace Jellyfin.Plugin.TubeArchivistMetadataKids
 {
     /// <summary>
     /// The main plugin.
